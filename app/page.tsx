@@ -32,8 +32,8 @@ const layanan = [
   'Agen Resmi PT. Taman Impian Jaya Ancol',
 ]
 
-async function loadHomeData() {
-  return Promise.all([
+export default async function Home() {
+  const [events, banners] = await Promise.all([
     prisma.event.findMany({
       where: { status: 'ACTIVE' },
       orderBy: { date: 'desc' },
@@ -44,18 +44,6 @@ async function loadHomeData() {
       select: { imageUrl: true },
     }),
   ])
-}
-
-export default async function Home() {
-  let events: Awaited<ReturnType<typeof loadHomeData>>[0] = []
-  let banners: Awaited<ReturnType<typeof loadHomeData>>[1] = []
-  try {
-    const result = await loadHomeData()
-    events = result[0]
-    banners = result[1]
-  } catch (error) {
-    console.error('Gagal memuat data beranda:', error)
-  }
 
   return (
     <main>
