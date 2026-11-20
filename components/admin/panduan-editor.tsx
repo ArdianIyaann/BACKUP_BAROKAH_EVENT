@@ -216,6 +216,7 @@ export function PanduanEditor({
   initialCoverLabel,
   initialCoverHeading,
   initialCoverSubheading,
+  initialCoverTitle,
   initialFontSizes,
   initialItineraryTitle,
   initialItineraryKeterangan,
@@ -261,6 +262,7 @@ export function PanduanEditor({
   initialCoverLabel: string
   initialCoverHeading: string
   initialCoverSubheading: string
+  initialCoverTitle: string
   initialFontSizes: string | null
   initialItineraryTitle: string
   initialItineraryKeterangan: string
@@ -321,6 +323,7 @@ export function PanduanEditor({
   const [coverLabel, setCoverLabel] = useState<string>(initialCoverLabel)
   const [coverHeading, setCoverHeading] = useState<string>(initialCoverHeading)
   const [coverSubheading, setCoverSubheading] = useState<string>(initialCoverSubheading)
+  const [coverTitle, setCoverTitle] = useState<string>(initialCoverTitle)
   const [fontSizes, setFontSizes] = useState<PanduanFontSizes>(() => parsePanduanFontSizes(initialFontSizes))
   const [uploadingLogo, setUploadingLogo] = useState<LogoSlot | null>(null)
 
@@ -487,6 +490,7 @@ export function PanduanEditor({
           panduanCoverLabel: coverLabel.trim() || null,
           panduanCoverHeading: coverHeading.trim() || null,
           panduanCoverSubheading: coverSubheading.trim() || null,
+          panduanCoverTitle: coverTitle.trim() || null,
           panduanFontSizes: serializePanduanFontSizes(fontSizes),
         }),
       })
@@ -1119,6 +1123,25 @@ export function PanduanEditor({
 
       <div className="rounded-2xl border border-[#dfe4e8] bg-white p-5 shadow-sm">
         <div>
+          <h2 className="text-sm font-bold text-[#1b3555]">Nama Event di Sampul</h2>
+          <p className="mt-0.5 text-xs text-[#657080]">
+            Tulisan putih besar pada sampul panduan. Kosongkan agar otomatis memakai nama event
+            &quot;{eventTitle}&quot;. Ukurannya diatur di bagian Ukuran Font.
+          </p>
+        </div>
+        <textarea
+          id="panduan-cover-title"
+          value={coverTitle}
+          onChange={(e) => setCoverTitle(e.target.value.slice(0, 500))}
+          placeholder={eventTitle}
+          maxLength={500}
+          rows={2}
+          className="mt-3 w-full resize-y rounded-lg border border-[#dfe4e8] bg-white px-4 py-3 text-base font-semibold leading-snug text-[#1b3555] outline-none transition-colors placeholder:text-[#9aa3af] focus:border-[#1b4f9c] focus:ring-2 focus:ring-[#1b4f9c]/15"
+        />
+      </div>
+
+      <div className="rounded-2xl border border-[#dfe4e8] bg-white p-5 shadow-sm">
+        <div>
           <h2 className="text-sm font-bold text-[#1b3555]">Judul di Atas Nama Event</h2>
           <p className="mt-0.5 text-xs text-[#657080]">
             Judul kuning besar di atas nama event pada sampul panduan. Bisa dua baris (Enter). Kosongkan untuk memakai
@@ -1179,9 +1202,9 @@ export function PanduanEditor({
         </div>
         {renderLogoGrid([
           { slot: 'cover-left', label: 'Kiri', url: coverLogoLeft, fallback: logoLeft ?? '/logo%20barokah%20event%20cover%20panduan.png' },
-          { slot: 'cover-left2', label: 'Kiri 1', url: coverLogoLeft2, fallback: logoLeft2 },
-          { slot: 'cover-center', label: 'Tengah', url: coverLogoCenter, fallback: logoCenter },
-          { slot: 'cover-right2', label: 'Kanan 1', url: coverLogoRight2, fallback: logoRight2 ?? '/ASITA%20NO%20BACKGROUND%20DENGAN%20BORDER%20PUTIHH.png' },
+          { slot: 'cover-left2', label: 'Kiri 1', url: coverLogoLeft2, fallback: null },
+          { slot: 'cover-center', label: 'Tengah', url: coverLogoCenter, fallback: null },
+          { slot: 'cover-right2', label: 'Kanan 1', url: coverLogoRight2, fallback: '/ASITA%20NO%20BACKGROUND%20DENGAN%20BORDER%20PUTIHH.png' },
           { slot: 'cover-right', label: 'Kanan', url: coverLogoRight, fallback: logoRight ?? '/PESONA%20INDONESIA%20DENGAN%20WARNA%20PUTIH.png' },
         ])}
       </div>

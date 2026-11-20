@@ -126,6 +126,7 @@ model Event {
     panduanCoverHeading    String? @db.Text
     // Keterangan kecil di bawah judul atas nama event pada sampul panduan.
     panduanCoverSubheading String? @db.Text
+    panduanCoverTitle      String? @db.Text
     // Ukuran font per kelompok teks panduan (JSON map delta px, mis.
     // { "coverTitle": 4, "body": -1 }). Null/0 = ukuran bawaan.
     panduanFontSizes       String? @db.Text

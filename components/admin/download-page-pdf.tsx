@@ -112,6 +112,9 @@ export function DownloadPagePdf({
             pixelRatio: 2,
             backgroundColor: '#ffffff',
             cacheBust: true,
+            imagePlaceholder:
+              'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==',
+            onImageErrorHandler: () => {},
           })
           const imgW = canvas.width
           const imgH = canvas.height

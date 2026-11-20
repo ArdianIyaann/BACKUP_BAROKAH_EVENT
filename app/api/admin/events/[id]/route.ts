@@ -43,7 +43,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
     return NextResponse.json({ error: parsed.error.issues[0]?.message ?? 'Data tidak valid' }, { status: 400 })
   }
 
-  const { title, date, dateEnd, location, status, note, panduanItinerary, panduanRules, panduanSections, crewName, crewPhone, crewRole, crewPhotoUrl, crewList, denahKamarCrewName, denahKamarCrewRole, denahKamarCrewPhotoUrl, denahVwCrewName, denahVwCrewRole, denahVwCrewPhotoUrl, panduanLogoLeft, panduanLogoLeft2, panduanLogoCenter, panduanLogoRight2, panduanLogoRight, panduanLogoTopRight, panduanLogoTopRight2, panduanCoverLogoLeft, panduanCoverLogoLeft2, panduanCoverLogoCenter, panduanCoverLogoRight2, panduanCoverLogoRight, panduanCoverImageLeft, panduanCoverImageRight, panduanCoverLabel, panduanCoverHeading, panduanCoverSubheading, panduanFontSizes, vwName, vwTitle, itineraryTitle, itineraryKeterangan, itineraryKeterangan2, denahKamarTitle, denahKamarKeterangan, denahKamarKeterangan2, denahDudukTitle, vwKeterangan, vwKeterangan2 } = parsed.data
+  const { title, date, dateEnd, location, status, note, panduanItinerary, panduanRules, panduanSections, crewName, crewPhone, crewRole, crewPhotoUrl, crewList, denahKamarCrewName, denahKamarCrewRole, denahKamarCrewPhotoUrl, denahVwCrewName, denahVwCrewRole, denahVwCrewPhotoUrl, panduanLogoLeft, panduanLogoLeft2, panduanLogoCenter, panduanLogoRight2, panduanLogoRight, panduanLogoTopRight, panduanLogoTopRight2, panduanCoverLogoLeft, panduanCoverLogoLeft2, panduanCoverLogoCenter, panduanCoverLogoRight2, panduanCoverLogoRight, panduanCoverImageLeft, panduanCoverImageRight, panduanCoverLabel, panduanCoverHeading, panduanCoverSubheading, panduanCoverTitle, panduanFontSizes, vwName, vwTitle, itineraryTitle, itineraryKeterangan, itineraryKeterangan2, denahKamarTitle, denahKamarKeterangan, denahKamarKeterangan2, denahDudukTitle, vwKeterangan, vwKeterangan2 } = parsed.data
 
   const data: Prisma.EventUpdateInput = {}
   if (title !== undefined) data.title = title
@@ -118,6 +118,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
   if (panduanCoverLabel !== undefined) data.panduanCoverLabel = panduanCoverLabel || null
   if (panduanCoverHeading !== undefined) data.panduanCoverHeading = panduanCoverHeading || null
   if (panduanCoverSubheading !== undefined) data.panduanCoverSubheading = panduanCoverSubheading || null
+  if (panduanCoverTitle !== undefined) data.panduanCoverTitle = panduanCoverTitle || null
   if (panduanFontSizes !== undefined) data.panduanFontSizes = panduanFontSizes || null
 
   if (Object.keys(data).length === 0) {

@@ -355,6 +355,7 @@ export default async function EventDetail({
           initialCoverLabel={event.panduanCoverLabel ?? ''}
           initialCoverHeading={event.panduanCoverHeading ?? ''}
           initialCoverSubheading={event.panduanCoverSubheading ?? ''}
+          initialCoverTitle={event.panduanCoverTitle ?? ''}
           initialFontSizes={event.panduanFontSizes ?? null}
           initialDenahDudukTitle={event.denahDudukTitle ?? ''}
           denahDudukBuses={seatBuses}

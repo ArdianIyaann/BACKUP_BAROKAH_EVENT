@@ -20,9 +20,9 @@ const labelCls = 'block text-[11px] font-bold uppercase tracking-wide text-[#657
 const inputCls =
   'mt-1.5 w-full rounded-xl border border-[#dfe4e8] bg-[#f8fafc] px-3.5 py-2.5 text-sm font-semibold text-[#1b3555] outline-none transition-colors placeholder:font-normal placeholder:text-[#9aa3af] focus:border-[#1b4f9c] focus:bg-white focus:ring-2 focus:ring-[#1b4f9c]/15'
 
-function Field({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
+function Field({ label, hint, children, className }: { label: string; hint?: string; children: React.ReactNode; className?: string }) {
   return (
-    <div>
+    <div className={className}>
       <label className={labelCls}>{label}</label>
       {children}
       {hint && <p className="mt-1 text-[11px] font-medium text-[#9aa3af]">{hint}</p>}
@@ -135,11 +135,19 @@ export function EventForm({
       </div>
 
       <div className={compact ? 'grid gap-3.5 sm:grid-cols-2' : 'grid gap-4 sm:grid-cols-2'}>
-        <Field label="Nama VW (Denah VW)">
-          <input value={form.vwName} onChange={(e) => set('vwName', e.target.value)} placeholder="VW MAGELANG" className={inputCls} />
-        </Field>
-        <Field label="Catatan" hint="Opsional — tampil sebagai info tambahan di halaman publik.">
-          <input value={form.note} onChange={(e) => set('note', e.target.value)} placeholder="Contoh: kuota penuh" className={inputCls} />
+        {initial && (
+          <Field label="Nama VW (Denah VW)">
+            <input value={form.vwName} onChange={(e) => set('vwName', e.target.value)} placeholder="VW MAGELANG" className={inputCls} />
+          </Field>
+        )}
+        <Field label="Catatan" hint="Opsional — tampil sebagai info tambahan di halaman publik." className="sm:col-span-2">
+          <textarea
+            value={form.note}
+            onChange={(e) => set('note', e.target.value)}
+            placeholder="Contoh: kuota penuh"
+            rows={4}
+            className={`${inputCls} resize-y`}
+          />
         </Field>
       </div>
 

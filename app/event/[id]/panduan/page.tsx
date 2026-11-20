@@ -138,7 +138,7 @@ function CustomPanduanSection({
 async function getEvent(id: string) {
   return prisma.event.findUnique({
     where: { id },
-    select: { id: true, title: true, date: true, dateEnd: true, location: true, vwName: true, vwTitle: true, itineraryTitle: true, itineraryKeterangan: true, itineraryKeterangan2: true, denahKamarTitle: true, denahKamarKeterangan: true, denahKamarKeterangan2: true, denahDudukTitle: true, vwKeterangan: true, vwKeterangan2: true, panduanItinerary: true, panduanRules: true, panduanSections: true, crewName: true, crewPhone: true, crewRole: true, crewPhotoUrl: true, crewList: true, denahKamarCrewName: true, denahKamarCrewRole: true, denahKamarCrewPhotoUrl: true, denahVwCrewName: true, denahVwCrewRole: true, denahVwCrewPhotoUrl: true, panduanLogoLeft: true, panduanLogoLeft2: true, panduanLogoCenter: true, panduanLogoRight2: true, panduanLogoRight: true, panduanLogoTopRight: true, panduanLogoTopRight2: true, panduanCoverLogoLeft: true, panduanCoverLogoLeft2: true, panduanCoverLogoCenter: true, panduanCoverLogoRight2: true, panduanCoverLogoRight: true, panduanCoverImageLeft: true, panduanCoverImageRight: true, panduanCoverLabel: true, panduanCoverHeading: true, panduanCoverSubheading: true, panduanFontSizes: true },
+    select: { id: true, title: true, date: true, dateEnd: true, location: true, vwName: true, vwTitle: true, itineraryTitle: true, itineraryKeterangan: true, itineraryKeterangan2: true, denahKamarTitle: true, denahKamarKeterangan: true, denahKamarKeterangan2: true, denahDudukTitle: true, vwKeterangan: true, vwKeterangan2: true, panduanItinerary: true, panduanRules: true, panduanSections: true, crewName: true, crewPhone: true, crewRole: true, crewPhotoUrl: true, crewList: true, denahKamarCrewName: true, denahKamarCrewRole: true, denahKamarCrewPhotoUrl: true, denahVwCrewName: true, denahVwCrewRole: true, denahVwCrewPhotoUrl: true, panduanLogoLeft: true, panduanLogoLeft2: true, panduanLogoCenter: true, panduanLogoRight2: true, panduanLogoRight: true, panduanLogoTopRight: true, panduanLogoTopRight2: true, panduanCoverLogoLeft: true, panduanCoverLogoLeft2: true, panduanCoverLogoCenter: true, panduanCoverLogoRight2: true, panduanCoverLogoRight: true, panduanCoverImageLeft: true, panduanCoverImageRight: true, panduanCoverLabel: true, panduanCoverHeading: true, panduanCoverSubheading: true, panduanCoverTitle: true, panduanFontSizes: true },
   })
 }
 
@@ -210,10 +210,9 @@ export default async function EventPanduanPage({
   const coverLogoLeftUrl = event.panduanCoverLogoLeft ?? event.panduanLogoLeft ?? '/logo%20barokah%20event%20cover%20panduan.png'
   const coverLogoRightUrl =
     event.panduanCoverLogoRight ?? event.panduanLogoRight ?? '/PESONA%20INDONESIA%20DENGAN%20WARNA%20PUTIH.png'
-  const coverLogoLeft2 = event.panduanCoverLogoLeft2 ?? event.panduanLogoLeft2
-  const coverLogoCenter = event.panduanCoverLogoCenter ?? event.panduanLogoCenter
-  const coverLogoRight2 =
-    event.panduanCoverLogoRight2 ?? event.panduanLogoRight2 ?? '/ASITA%20NO%20BACKGROUND%20DENGAN%20BORDER%20PUTIHH.png'
+  const coverLogoLeft2 = event.panduanCoverLogoLeft2
+  const coverLogoCenter = event.panduanCoverLogoCenter
+  const coverLogoRight2 = event.panduanCoverLogoRight2 ?? '/ASITA%20NO%20BACKGROUND%20DENGAN%20BORDER%20PUTIHH.png'
   const coverImageLeftUrl = event.panduanCoverImageLeft
   const coverImageRightUrl = event.panduanCoverImageRight
   const hexClip = 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)'
@@ -237,7 +236,7 @@ export default async function EventPanduanPage({
                 topRight={event.panduanLogoTopRight}
                 topRight2={event.panduanLogoTopRight2}
               />
-              <div data-a4-body className="flow-root">
+              <div data-a4-body className="px-[40px] text-justify flow-root">
               <h2 className="text-3xl font-extrabold uppercase tracking-wide text-[#1b3555]">Our Vision and Mission</h2>
 
               <div className="mt-4 space-y-4">
@@ -295,10 +294,10 @@ export default async function EventPanduanPage({
                 topRight={event.panduanLogoTopRight}
                 topRight2={event.panduanLogoTopRight2}
               />
-              <div data-a4-body className="space-y-6 px-[80px] flow-root">
+              <div data-a4-body className="space-y-6 px-[40px] text-justify flow-root">
               <h2 className="text-center text-2xl font-extrabold uppercase tracking-wide text-black">Doa Bepergian Jauh</h2>
               <div>
-                <p className="mt-3 font-bold text-right text-lg leading-loose text-black" dir="rtl" lang="ar">
+                <p className="mt-3 font-bold text-lg leading-loose text-black" dir="rtl" lang="ar">
                   أَللّٰهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هٰذَا وَاطْوِعَنَّابُعْدَهُ أَللّٰهُمَّ أَنْتَ الصَّاحِبُ فِى السَّفَرِوَالْخَلِيْفَةُ فِى الْأَهْلِ
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-black">
@@ -335,7 +334,7 @@ export default async function EventPanduanPage({
 
                 <h3 className="mt-3 text-[11px] font-bold uppercase tracking-wide text-black">Niat Sholat Jamak Takdim di Waktu Dzuhur</h3>
                 <p className="mt-1 text-sm leading-relaxed text-black">Niat sholat dzuhur dahulu:</p>
-                <p className="mt-1 font-bold text-right text-lg leading-loose text-black" dir="rtl" lang="ar">
+                <p className="mt-1 font-bold text-lg leading-loose text-black" dir="rtl" lang="ar">
                   أُصَلِّيْ فَرْضَ الظُّهْرِ أَرْبَعَ رَكَعَاتٍ مَجْمُوْعًا مَعَ العَصْرِ أَدَاءً لِلَّهِ تَعَالَى
                 </p>
                 <p className="mt-0.5 text-sm leading-relaxed text-black">
@@ -344,7 +343,7 @@ export default async function EventPanduanPage({
                 </p>
 
                 <p className="mt-3 text-sm leading-relaxed text-black">Lalu, niat sholat ashar:</p>
-                <p className="mt-1 font-bold text-right text-lg leading-loose text-black" dir="rtl" lang="ar">
+                <p className="mt-1 font-bold text-lg leading-loose text-black" dir="rtl" lang="ar">
                   أُصَلِّيْ فَرْضَ العَصْرِ أَرْبَعَ رَكَعَاتٍ مَجْمُوْعًا مَعَ الظُّهْرِ أَدَاءً لِلَّهِ تَعَالَى
                 </p>
                 <p className="mt-0.5 text-sm leading-relaxed text-black">
@@ -354,7 +353,7 @@ export default async function EventPanduanPage({
 
                 <h3 className="mt-4 text-[11px] font-bold uppercase tracking-wide text-black">Niat Sholat Jamak Takdim di Waktu Magrib</h3>
                 <p className="mt-1 text-sm leading-relaxed text-black">Niat solat magrib dahulu:</p>
-                <p className="mt-1 font-bold text-right text-lg leading-loose text-black" dir="rtl" lang="ar">
+                <p className="mt-1 font-bold text-lg leading-loose text-black" dir="rtl" lang="ar">
                   أُصَلِّيْ فَرْضَ الْمَغْرِبِ ثَلَاثَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ مَجْمُوْعًا بِالْعِشَاءِ جَمْعَ تَقْدِيْمٍ لِلّٰهِ تَعَالَى
                 </p>
                 <p className="mt-0.5 text-sm leading-relaxed text-black">
@@ -363,7 +362,7 @@ export default async function EventPanduanPage({
                 </p>
 
                 <p className="mt-3 text-sm leading-relaxed text-black">Lalu niat solat isya:</p>
-                <p className="mt-1 font-bold text-right text-lg leading-loose text-black" dir="rtl" lang="ar">
+                <p className="mt-1 font-bold text-lg leading-loose text-black" dir="rtl" lang="ar">
                   أُصَلِّيْ فَرْضَ العِشَاءِ أَرْبَعَ رَكَعَاتٍ مَجْمُوْعًا مع المغرب جمع تقديم أَدَاءً لِلَّهِ تَعَالَى
                 </p>
                 <p className="mt-0.5 text-sm leading-relaxed text-black">
@@ -387,19 +386,19 @@ export default async function EventPanduanPage({
                 topRight={event.panduanLogoTopRight}
                 topRight2={event.panduanLogoTopRight2}
               />
-              <div data-a4-body className="space-y-6 px-[80px] flow-root">
+              <div data-a4-body className="space-y-6 px-[40px] text-justify flow-root">
               <div>
                 <h2 className="text-center text-2xl font-extrabold uppercase tracking-wide text-black">Tata Cara Sholat Jamak Takdim dengan Qashar</h2>
 
                 <h3 className="mt-3 text-[11px] font-bold uppercase tracking-wide text-black">Niat Sholat Dhuhur dan Ashar, dilakukan di waktu dhuhur (Jamak Takdim)</h3>
-                <p className="mt-1 font-bold text-right text-lg leading-loose text-black" dir="rtl" lang="ar">
+                <p className="mt-1 font-bold text-lg leading-loose text-black" dir="rtl" lang="ar">
                   أُصَلِّيْ فَرْضَ الظُّهْرِ رَكْعَتَيْنِ مُسْتَقْبِلَ الْقِبْلَةِ مَجْمُوْعًا بِالْعَصْرِ جَمْعَ تَقْدِيْمٍ قَصْرًا لِلّٰهِ تَعَالَى
                 </p>
                 <p className="mt-0.5 text-sm leading-relaxed text-black">
                   “Aku berniat shalat fardhu dhuhur dua rakaat digabungkan dengan shalat ashar dengan jamak takdim,
                   diringkas karena Allah Ta’ala.”
                 </p>
-                <p className="mt-3 font-bold text-right text-lg leading-loose text-black" dir="rtl" lang="ar">
+                <p className="mt-3 font-bold text-lg leading-loose text-black" dir="rtl" lang="ar">
                   أُصَلِّيْ فَرْضَ الْعَصْرِ رَكْعَتَيْنِ مُسْتَقْبِلَ الْقِبْلَةِ مَجْمُوْعًا بِالظُّهْرِ جَمْعَ تَقْدِيْمٍ قَصْرًا لِلّٰهِ تَعَالَى
                 </p>
                 <p className="mt-0.5 text-sm leading-relaxed text-black">
@@ -408,14 +407,14 @@ export default async function EventPanduanPage({
                 </p>
 
                 <h3 className="mt-4 text-[11px] font-bold uppercase tracking-wide text-black">Niat Sholat Maghrib dan Isya, dilakukan di waktu maghrib (Jamak Takdim)</h3>
-                <p className="mt-1 font-bold text-right text-lg leading-loose text-black" dir="rtl" lang="ar">
+                <p className="mt-1 font-bold text-lg leading-loose text-black" dir="rtl" lang="ar">
                   أُصَلِّيْ فَرْضَ الْعِشَاءِ رَكْعَتَيْنِ قَصْرًا مَجْمُوْعًا إِلَىالْمَغْرِبِ لِلّٰهِ تَعَالَى
                 </p>
                 <p className="mt-0.5 text-sm leading-relaxed text-black">
                   “Saya niat sholat fardhu Isya dua rakaat secara qashar dikumpulkan pada sholat Maghrib karena
                   Allah.”
                 </p>
-                <p className="mt-3 font-bold text-right text-lg leading-loose text-black" dir="rtl" lang="ar">
+                <p className="mt-3 font-bold text-lg leading-loose text-black" dir="rtl" lang="ar">
                   أُصَلِّيْ فَرْضَ الْعِشَاءِ رَكْعَتَيْنِ قَصْرًا مَجْمُوْعًا إِلَىالْمَغْرِبِ لِلّٰهِ تَعَالَى
                 </p>
                 <p className="mt-0.5 text-sm leading-relaxed text-black">
@@ -428,14 +427,14 @@ export default async function EventPanduanPage({
                 <h2 className="text-center text-2xl font-extrabold uppercase tracking-wide text-black">Tata Cara Sholat Jamak Takhir dengan Qashar</h2>
 
                 <h3 className="mt-3 text-[11px] font-bold uppercase tracking-wide text-black">Niat Sholat Dhuhur dan Ashar, dilakukan di waktu Ashar (Jamak Takhir)</h3>
-                <p className="mt-1 font-bold text-right text-lg leading-loose text-black" dir="rtl" lang="ar">
+                <p className="mt-1 font-bold text-lg leading-loose text-black" dir="rtl" lang="ar">
                   أُصَلِّيْ فَرْضَ الْعَصْرِ رَكْعَتَيْنِ مَجْمُوْعًا بِالظُّهْرِ جَمْعَ تَأْخِيْرٍ قَصْرً لِلّٰهِ تَعَالَى
                 </p>
                 <p className="mt-0.5 text-sm leading-relaxed text-black">
                   “Aku berniat sholat fardhu ashar dua rakaat digabungkan dengan sholat dzuhur dengan jamak takhir,
                   diringkas karena Allah Ta’ala.”
                 </p>
-                <p className="mt-3 font-bold text-right text-lg leading-loose text-black" dir="rtl" lang="ar">
+                <p className="mt-3 font-bold text-lg leading-loose text-black" dir="rtl" lang="ar">
                   أُصَلِّيْ فَرْضَ الظُّهْرِ رَكْعَتَيْنِ مَجْمُوْعًا إِلَى الْعَصْرِ جَمْعَ تَأْخِيْرٍ قَصْرً لِلّٰهِ تَعَالَى
                 </p>
                 <p className="mt-0.5 text-sm leading-relaxed text-black">
@@ -444,14 +443,14 @@ export default async function EventPanduanPage({
                 </p>
 
                 <h3 className="mt-4 text-[11px] font-bold uppercase tracking-wide text-black">Niat Sholat Maghrib dan Isya, dilakukan di waktu isya (Jamak Takhir)</h3>
-                <p className="mt-1 font-bold text-right text-lg leading-loose text-black" dir="rtl" lang="ar">
+                <p className="mt-1 font-bold text-lg leading-loose text-black" dir="rtl" lang="ar">
                   أُصَلِّيْ فَرْضَ الْعِشَاءِ رَكْعَتَيْنِ مَجْمُوْعًا بِالْمَغْرِبِ جَمْعَ تَأْخِيْرٍ قَصْرً لِلّٰهِ تَعَالَى
                 </p>
                 <p className="mt-0.5 text-sm leading-relaxed text-black">
                   “Aku berniat sholat fardhu isya dua rakaat digabungkan dengan sholat maghrib dengan jamak takhir,
                   diringkas karena Allah Ta’ala.”
                 </p>
-                <p className="mt-3 font-bold text-right text-lg leading-loose text-black" dir="rtl" lang="ar">
+                <p className="mt-3 font-bold text-lg leading-loose text-black" dir="rtl" lang="ar">
                   أُصَلِّيْ فَرْضَ الْمَغْرِبِ ثَلَاثَ رَكَعَاتٍ مَجْمُوْعًا إِلَى الْعِشَاءِ جَمْعَ تَأْخِيْرٍ لِلّٰهِ تَعَالَى
                 </p>
                 <p className="mt-0.5 text-sm leading-relaxed text-black">
@@ -475,7 +474,7 @@ export default async function EventPanduanPage({
                 topRight={event.panduanLogoTopRight}
                 topRight2={event.panduanLogoTopRight2}
               />
-              <div data-a4-body className="px-[40px] flow-root">
+              <div data-a4-body className="px-[40px] text-justify flow-root">
               <h2 className="text-center text-2xl font-extrabold uppercase tracking-wide text-[#1b3555]">Tata Tertib</h2>
               <ol className="mt-4 space-y-3">
                 {(() => {
@@ -830,7 +829,7 @@ export default async function EventPanduanPage({
                     )}
                 </div>
                 <div className="-ml-10 w-[600px] -mt-[158px] -translate-y-[93px] rounded-none bg-[#ffc107]/95 shadow-xl backdrop-blur relative z-20">
-                  <div className="pointer-events-none absolute bottom-full left-10 mb-3 flex flex-col items-start gap-1">
+                  <div className="pointer-events-none absolute bottom-full left-10 mb-12 flex flex-col items-start gap-1">
                     <p
                       className="max-w-[22rem] whitespace-pre-line font-extrabold uppercase leading-tight tracking-[0.14em] text-[#ffc107] [text-shadow:0_1px_3px_rgba(0,0,0,0.65)]"
                       style={{ fontSize: 'calc(2.75rem + var(--panduan-cover-heading-delta, 0px))' }}
@@ -844,7 +843,7 @@ export default async function EventPanduanPage({
                       className="max-w-[22rem] whitespace-pre-line font-extrabold uppercase leading-tight tracking-[0.14em] text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.65)]"
                       style={{ fontSize: 'calc(1.875rem + var(--panduan-cover-title-delta, 0px))' }}
                     >
-                      {event.title}
+                      {event.panduanCoverTitle?.trim() || event.title}
                     </p>
                     <span
                       className="whitespace-nowrap font-normal text-[#ffc107] [text-shadow:0_1px_2px_rgba(0,0,0,0.55)]"

@@ -17,8 +17,11 @@ for (const file of envFiles) {
 // `@db.LongText`) tidak dikenal connector SQLite, jadi untuk mode SQLite kita
 // turunkan schema sementara tanpa anotasi tersebut. Schema utama tetap satu
 // sumber kebenaran; file turunan ini ditulis ulang setiap kali Prisma dijalankan.
-function schemaFor(databaseUrl: string): string {
-  if (!databaseUrl.startsWith('file:')) return 'prisma/schema.prisma'
+const DATABASE_URL = process.env.DATABASE_URL ?? ''
+const isSqlite = DATABASE_URL.startsWith('file:')
+
+function schemaFor(): string {
+  if (!isSqlite) return 'prisma/schema.prisma'
 
   const source = readFileSync('prisma/schema.prisma', 'utf8')
   const sqlite = source
@@ -34,9 +37,9 @@ function schemaFor(databaseUrl: string): string {
 }
 
 export default defineConfig({
-  schema: schemaFor(process.env.DATABASE_URL ?? ''),
+  schema: schemaFor(),
   migrations: {
-    path: 'prisma/migrations',
+    path: isSqlite ? 'prisma/sqlite-migrations' : 'prisma/migrations',
     seed: 'node prisma/seed.mjs',
   },
 })
