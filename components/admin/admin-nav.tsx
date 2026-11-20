@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Bookmark, Eye, History, Image as ImageIcon, Package, QrCode } from 'lucide-react'
+import { Bookmark, Eye, History, Image as ImageIcon, Package, QrCode, UserCog } from 'lucide-react'
 
 type NavItem = {
   href: string
@@ -44,6 +44,12 @@ const ITEMS: NavItem[] = [
     label: 'Preset',
     icon: Bookmark,
     match: (p) => p.startsWith('/admin/preset'),
+  },
+  {
+    href: '/admin/akun',
+    label: 'Akun',
+    icon: UserCog,
+    match: (p) => p.startsWith('/admin/akun'),
   },
   {
     href: '/admin/logs',

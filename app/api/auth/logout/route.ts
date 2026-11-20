@@ -1,5 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { cookieOpts, getSession, getSessionCookieName, LEGACY_COOKIE_NAME, type SessionSlot } from '@/lib/auth'
+import {
+  cookieOpts,
+  getSession,
+  getSessionCookieName,
+  LEGACY_COOKIE_NAME,
+  revokeSessions,
+  type SessionSlot,
+} from '@/lib/auth'
 import { prisma } from '@/lib/db'
 import { logger } from '@/lib/logger'
 
@@ -24,6 +31,7 @@ export async function POST(request: NextRequest) {
   for (const slot of selected) {
     const session = await getSession(slot)
     if (session) {
+      await revokeSessions(session.sub, session.jti)
       await prisma.activityLog.create({
         data: { userId: session.sub, action: 'auth.logout', detail: { username: session.username, role: session.role } },
       })

@@ -5,6 +5,7 @@ import { BadgeCheck, BookOpen, Bus, Clock3, DoorOpen, MapPin } from 'lucide-reac
 import { prisma } from '@/lib/db'
 import { qrDataUrl, encodeToken } from '@/lib/scan'
 import { formatTanggalRentang } from '@/lib/dates'
+import { jeepLabels } from '@/lib/print'
 import { AutoRefresh } from '@/components/admin/auto-refresh'
 import { DownloadTicketPdf } from '@/components/admin/download-ticket-pdf'
 
@@ -27,6 +28,7 @@ export default async function TicketPage({ params }: { params: Promise<{ token: 
   const qr = await qrDataUrl(encodeToken(p.token), 420)
   const attended = p.scannedAt !== null
   const noTicket = p.ticketCode
+  const jeeps = jeepLabels(p)
 
   return (
     <main className="min-h-screen bg-[#f4f7fa] px-4 py-8">
@@ -88,18 +90,24 @@ export default async function TicketPage({ params }: { params: Promise<{ token: 
                   <DoorOpen size={13} /> {p.seat || '—'}
                 </dd>
               </div>
+              {p.room && (
+                <div>
+                  <dt className="text-xs text-[#657080]">Kamar</dt>
+                  <dd className="mt-0.5 font-semibold text-[#1b3555]">{p.room}</dd>
+                </div>
+              )}
+              {jeeps.length > 0 && (
+                <div className="col-start-2">
+                  <dt className="text-xs text-[#657080]">No Jeep</dt>
+                  <dd className="mt-0.5 font-semibold text-[#1b3555]">{jeeps.join(' · ')}</dd>
+                </div>
+              )}
               {p.bus.workers.length > 0 && (
                 <div className="col-span-2">
                   <dt className="text-xs text-[#657080]">Crew Bertugas</dt>
                   <dd className="mt-0.5 text-xs font-semibold text-[#1b3555]">
                     {p.bus.workers.map((w) => w.user.name ?? w.user.username).join(' · ')}
                   </dd>
-                </div>
-              )}
-              {p.room && (
-                <div>
-                  <dt className="text-xs text-[#657080]">Kamar</dt>
-                  <dd className="mt-0.5 font-semibold text-[#1b3555]">{p.room}</dd>
                 </div>
               )}
               {p.vw && (

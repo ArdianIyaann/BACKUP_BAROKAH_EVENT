@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react'
 import { prisma } from '@/lib/db'
 import { qrDataUrl, encodeToken } from '@/lib/scan'
 import { formatTanggalRentang } from '@/lib/dates'
-import { chunkPairs, metaLine } from '@/lib/print'
+import { chunkPairs, jeepLine, metaLine } from '@/lib/print'
 import { PrintButton } from '@/components/admin/print-button'
 import { QrBusFilter } from '@/components/admin/qr-bus-filter'
 import { QrLayoutToggle, type QrLayout } from '@/components/admin/qr-layout-toggle'
@@ -67,6 +67,7 @@ function QrCard({
   variant: QrLayout
 }) {
   const single = variant === 'single'
+  const jeep = jeepLine(p)
   return (
     <button
       type="button"
@@ -77,6 +78,7 @@ function QrCard({
       data-qr-order={p.order}
       data-qr-seat={p.seat ?? ''}
       data-qr-vw={p.vw ?? ''}
+      data-qr-jeep={jeep}
       data-qr-crew={crewNames(bus)}
       data-qr-ticket={p.ticketCode}
       data-qr-attended={p.scannedAt ? 'yes' : 'no'}
@@ -107,6 +109,9 @@ function QrCard({
       <p className={`font-semibold text-[#657080] ${single ? 'text-[11px]' : 'text-[10px]'}`}>
         {metaLine({ order: p.order, seat: p.seat, vw: p.vw })}
       </p>
+      {jeep && (
+        <p className={`truncate font-bold text-[#1b4f9c] ${single ? 'text-[11px]' : 'text-[10px]'}`}>{jeep}</p>
+      )}
       {bus.workers.length > 0 && (
         <p className="mt-0.5 truncate text-[10px] font-bold text-[#1b4f9c]">Crew: {crewNames(bus)}</p>
       )}

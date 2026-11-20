@@ -19,6 +19,7 @@ export type Session = {
   username: string
   role: SessionRole
   slot: SessionSlot
+  jti: string
 }
 
 type SessionInput = Omit<Session, 'slot'>
@@ -62,6 +63,7 @@ export async function signSession(session: SessionInput): Promise<string> {
   return new SignJWT({ username: session.username, role: session.role })
     .setProtectedHeader({ alg: 'HS256' })
     .setSubject(session.sub)
+    .setJti(session.jti)
     .setIssuedAt()
     .setExpirationTime(`${SESSION_MAX_AGE}s`)
     .sign(secret())
@@ -71,12 +73,13 @@ export async function verifySession(token: string): Promise<Session | null> {
   try {
     const { payload } = await jwtVerify(token, secret())
     const role = payload.role
-    if (!payload.sub || (role !== 'ADMIN' && role !== 'OWNER' && role !== 'CREW')) return null
+    if (!payload.sub || !payload.jti || (role !== 'ADMIN' && role !== 'OWNER' && role !== 'CREW')) return null
     return {
       sub: payload.sub,
       username: String(payload.username ?? ''),
       role,
       slot: slotOfRole(role),
+      jti: payload.jti,
     }
   } catch {
     return null
@@ -101,12 +104,25 @@ async function loadSession(token: string | undefined, expectedSlot?: SessionSlot
   if (!token) return null
   const verified = await verifySession(token)
   if (!verified || (expectedSlot && verified.slot !== expectedSlot)) return null
-  const user = await prisma.user.findUnique({
-    where: { id: verified.sub },
+  const user = await prisma.user.findFirst({
+    where: {
+      id: verified.sub,
+      sessions: { some: { id: verified.jti, expiresAt: { gt: new Date() } } },
+    },
     select: { id: true, username: true, role: true },
   })
   if (!user || user.role !== verified.role) return null
-  return { sub: user.id, username: user.username, role: verified.role, slot: slotOfRole(user.role) }
+  return {
+    sub: user.id,
+    username: user.username,
+    role: verified.role,
+    slot: slotOfRole(user.role),
+    jti: verified.jti,
+  }
+}
+
+export async function revokeSessions(userId: string, jti?: string): Promise<void> {
+  await prisma.userSession.deleteMany({ where: { userId, ...(jti ? { id: jti } : {}) } })
 }
 
 export async function getSession(scope: SessionSlot): Promise<Session | null> {

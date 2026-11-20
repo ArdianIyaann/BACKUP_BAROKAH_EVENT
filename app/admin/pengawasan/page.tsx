@@ -197,8 +197,8 @@ export default async function OwnerSupervisionPage() {
           </table>
         </div>
         <p className="mt-3 rounded-xl bg-[#f8fafc] px-3 py-2 text-[11px] font-semibold text-[#657080]">
-          Sandi tidak pernah ditampilkan di sini. Setiap admin/owner bisa mengganti sandinya sendiri lewat tombol
-          “Ganti Sandi” di header panel.
+          Sandi tidak pernah ditampilkan di sini. Username dan sandi bisa diubah dari menu “Akun”; owner bisa mengubah
+          kredensial semua akun.
         </p>
       </div>
 

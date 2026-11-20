@@ -25,6 +25,22 @@ export function metaLine(input: { order: number; seat?: string | null; vw?: stri
   return parts.join(' · ')
 }
 
+export type JeepInput = {
+  jeepParis?: string | null
+  jeepMerapi?: string | null
+  jeepBromo?: string | null
+}
+
+/** Nomor jeep yang terisi, apa adanya (nilainya sudah termasuk jenisnya). */
+export function jeepLabels(p: JeepInput): string[] {
+  return [p.jeepParis, p.jeepMerapi, p.jeepBromo].map((v) => (v ?? '').trim()).filter(Boolean)
+}
+
+/** Semua nomor jeep dalam satu baris ringkas untuk kartu QR dan tiket. */
+export function jeepLine(p: JeepInput): string {
+  return jeepLabels(p).join(' · ')
+}
+
 /**
  * Mengelompokkan item menjadi potongan berukuran tetap untuk dicetak: dua
  * kartu QR per satu halaman A5. Sisa yang ganjil tetap jadi potongan terakhir

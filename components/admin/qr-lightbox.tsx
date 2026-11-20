@@ -11,6 +11,7 @@ type QrCardInfo = {
   order: string
   seat: string
   vw: string
+  jeep: string
   crew: string
   ticket: string
   attended: boolean
@@ -32,6 +33,7 @@ function readCard(el: HTMLElement): QrCardInfo {
     order: d.qrOrder ?? '',
     seat: d.qrSeat ?? '',
     vw: d.qrVw ?? '',
+    jeep: d.qrJeep ?? '',
     crew: d.qrCrew ?? '',
     ticket: d.qrTicket ?? '',
     attended: d.qrAttended === 'yes',
@@ -224,6 +226,12 @@ export function QrLightbox() {
               <dt className="font-semibold text-[#657080]">Posisi</dt>
               <dd className="font-bold text-[#1b3555]">{meta}</dd>
             </div>
+            {card.jeep && (
+              <div className="flex items-center justify-between gap-3 rounded-xl bg-[#f8fafc] px-3 py-2">
+                <dt className="font-semibold text-[#657080]">No Jeep</dt>
+                <dd className="font-bold text-[#1b4f9c]">{card.jeep}</dd>
+              </div>
+            )}
             {card.crew && (
               <div className="flex items-center justify-between gap-3 rounded-xl bg-[#f8fafc] px-3 py-2">
                 <dt className="font-semibold text-[#657080]">Crew</dt>

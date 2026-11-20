@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { AdminAutoLogout } from '@/components/admin/admin-auto-logout'
 import { AdminNav } from '@/components/admin/admin-nav'
 import { AutoRefresh } from '@/components/admin/auto-refresh'
 import { LogoutButton } from '@/components/admin/logout-button'
@@ -18,6 +19,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   return (
     <div className="min-h-screen bg-[#f4f7fa]" suppressHydrationWarning>
       <AutoRefresh />
+      <AdminAutoLogout />
 
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 flex-col border-r border-[#dfe4e8] bg-white lg:flex print:hidden">
         <div className="flex h-16 shrink-0 items-center gap-3 border-b border-[#dfe4e8] px-7">

@@ -65,8 +65,13 @@ const ACTION_GROUP: Record<string, LogGroup> = {
   'scan.duplicate': 'Scan',
   'auth.login.success': 'Keamanan',
   'auth.login.failed': 'Keamanan',
+  'auth.login.blocked': 'Keamanan',
   'auth.logout': 'Keamanan',
   'auth.password.change': 'Keamanan',
+  'auth.credentials.update': 'Keamanan',
+  'auth.account.create': 'Keamanan',
+  'auth.account.update': 'Keamanan',
+  'auth.account.delete': 'Keamanan',
   'log.delete': 'Keamanan',
 }
 

@@ -3,6 +3,7 @@ import { join } from 'node:path'
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { formatTanggalRentang } from '@/lib/dates'
+import { jeepLabels } from '@/lib/print'
 import { buildTicketPdf, ticketFileName } from '@/lib/ticket-pdf'
 
 export const dynamic = 'force-dynamic'
@@ -70,6 +71,7 @@ export async function GET(request: Request) {
     seat: p.seat,
     room: p.room,
     vw: p.vw,
+    jeeps: jeepLabels(p),
     crew: p.bus.workers.map((w) => w.user.name ?? w.user.username).join(' · '),
     attended: p.scannedAt !== null,
     scannedBy: p.scannedBy ? (p.scannedBy.name ?? p.scannedBy.username) : null,

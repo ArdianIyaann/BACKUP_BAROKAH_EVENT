@@ -1,7 +1,9 @@
+import { randomUUID } from 'node:crypto'
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
+import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/db'
-import { cookieOpts, getSessionCookieName, signSession, slotOfRole } from '@/lib/auth'
+import { cookieOpts, getSessionCookieName, SESSION_MAX_AGE, signSession, slotOfRole } from '@/lib/auth'
 import { logger } from '@/lib/logger'
 
 const DUMMY_HASH = '$2b$10$OyeDM9NMGCtakHwJ/qrORutPReVjNeD.uQzUWcs7heLGsU9xpREV.'
@@ -59,9 +61,47 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Username atau password salah.' }, { status: 401 })
   }
 
-  const token = await signSession({ sub: user.id, username: user.username, role: user.role })
+  const now = new Date()
+  await prisma.userSession.deleteMany({ where: { userId: user.id, expiresAt: { lte: now } } })
+  const active = await prisma.userSession.findUnique({
+    where: { userId: user.id },
+    select: { id: true },
+  })
+  if (active) {
+    await prisma.activityLog.create({
+      data: { userId: user.id, action: 'auth.login.blocked', detail: { username: user.username, ip } },
+    })
+    logger.warn('login blocked: another device is active', { username, ip })
+    return NextResponse.json(
+      { error: 'Akun sedang aktif di perangkat lain. Logout dari perangkat tersebut sebelum login di sini.' },
+      { status: 409 },
+    )
+  }
+
+  const jti = randomUUID()
+  const token = await signSession({ sub: user.id, username: user.username, role: user.role, jti })
+  try {
+    await prisma.userSession.create({
+      data: {
+        id: jti,
+        userId: user.id,
+        expiresAt: new Date(now.getTime() + SESSION_MAX_AGE * 1000),
+        ip,
+        userAgent: (request.headers.get('user-agent') ?? '').slice(0, 500) || null,
+      },
+    })
+  } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
+      return NextResponse.json(
+        { error: 'Akun sedang aktif di perangkat lain. Logout dari perangkat tersebut sebelum login di sini.' },
+        { status: 409 },
+      )
+    }
+    throw err
+  }
+
   await prisma.activityLog.create({
-    data: { userId: user.id, action: 'auth.login.success', detail: { username: user.username, role: user.role } },
+    data: { userId: user.id, action: 'auth.login.success', detail: { username: user.username, role: user.role, ip } },
   })
   logger.info('login ok', { username, role: user.role })
 

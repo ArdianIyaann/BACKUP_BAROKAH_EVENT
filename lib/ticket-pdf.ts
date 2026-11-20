@@ -42,6 +42,7 @@ export type TicketPdfData = {
   seat?: string | null
   room?: string | null
   vw?: string | null
+  jeeps?: string[]
   crew?: string | null
   attended: boolean
   scannedBy?: string | null
@@ -188,7 +189,11 @@ export async function buildTicketPdf(data: TicketPdfData): Promise<Uint8Array> {
     ['Kursi', (data.seat ?? '').trim() || '—'],
     ['Tanggal', data.eventDate],
   ]
-  if ((data.room ?? '').trim()) rows.push(['Kamar', (data.room as string).trim()])
+  const room = (data.room ?? '').trim()
+  const jeep = (data.jeeps ?? []).map((v) => v.trim()).filter(Boolean).join(' · ')
+  if (room) rows.push(['Kamar', room])
+  else if (jeep) rows.push(['', ''])
+  if (jeep) rows.push(['No Jeep', jeep])
   const vw = vwLabel(data.vw)
   if (vw) rows.push(['VW', vw])
   if ((data.eventLocation ?? '').trim()) rows.push(['Lokasi', (data.eventLocation as string).trim()])

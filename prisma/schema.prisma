@@ -43,6 +43,20 @@ model User {
   activities       ActivityLog[]
   scannedBySlots   Participant[] @relation("ScannedBy")
   workers          BusWorker[]
+  sessions         UserSession[]
+}
+
+model UserSession {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  ip        String?  @db.VarChar(100)
+  userAgent String?  @db.VarChar(500)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([expiresAt])
 }
 
 model Event {

@@ -17,6 +17,7 @@ const data = {
   seat: '12A',
   room: '204',
   vw: 'VW 044',
+  jeeps: ['JEEP MERAPI 001'],
   crew: 'Ahmad Fauzi · Siti Rahma',
   attended: true,
   scannedBy: 'crew1',
@@ -80,11 +81,12 @@ describe('buildTicketPdf', () => {
   })
 
   // Konten tiket digambar manual (bukan flow), jadi isi yang ekstrem bisa
-  // mendorong QR ke luar halaman. Ketiga kasus ini yang paling mungkin terjadi
+  // mendorong QR ke luar halaman. Kasus-kasus ini yang paling mungkin terjadi
   // di lapangan: field minimal, isi normal, dan nama/crew kepanjangan.
   const layouts: [string, Partial<TicketPdfData>][] = [
-    ['field minimal', { seat: null, room: null, vw: null, eventLocation: null, crew: '', attended: false, scannedBy: null }],
+    ['field minimal', { seat: null, room: null, vw: null, jeeps: [], eventLocation: null, crew: '', attended: false, scannedBy: null }],
     ['isi normal', {}],
+    ['tiga jeep', { jeeps: ['JEEP PARIS 001', 'JEEP MERAPI 002', 'JEEP BROMO 003'] }],
     [
       'nama & crew kepanjangan',
       {
