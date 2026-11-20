@@ -829,7 +829,7 @@ export default async function EventPanduanPage({
                     )}
                 </div>
                 <div className="-ml-10 w-[600px] -mt-[158px] -translate-y-[93px] rounded-none bg-[#ffc107]/95 shadow-xl backdrop-blur relative z-20">
-                  <div className="pointer-events-none absolute bottom-full left-10 mb-12 flex flex-col items-start gap-1">
+                  <div className="pointer-events-none absolute bottom-full left-10 mb-2 flex flex-col items-start gap-1">
                     <p
                       className="max-w-[22rem] whitespace-pre-line font-extrabold uppercase leading-tight tracking-[0.14em] text-[#ffc107] [text-shadow:0_1px_3px_rgba(0,0,0,0.65)]"
                       style={{ fontSize: 'calc(2.75rem + var(--panduan-cover-heading-delta, 0px))' }}
