@@ -18,10 +18,19 @@ export const metadata: Metadata = {
 
 export const revalidate = 60
 
-export default async function PaketPage() {
-  const pakets = await prisma.paketEvent.findMany({
+async function loadPakets() {
+  return prisma.paketEvent.findMany({
     orderBy: [{ order: 'asc' }, { createdAt: 'desc' }],
   })
+}
+
+export default async function PaketPage() {
+  let pakets: Awaited<ReturnType<typeof loadPakets>> = []
+  try {
+    pakets = await loadPakets()
+  } catch (error) {
+    console.error('Gagal memuat data paket:', error)
+  }
 
   return (
     <main className="min-h-screen bg-[#f4f7fa]">
