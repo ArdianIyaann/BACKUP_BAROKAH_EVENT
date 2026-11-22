@@ -1160,8 +1160,8 @@ export function PanduanEditor({
           Keterangan di Bawah Judul
         </label>
         <p className="mt-0.5 text-xs text-[#657080]">
-          Teks putih kecil (bukan bold) di bawah judul. Kosongkan untuk memakai bawaan &quot;Panduan perjalanan
-          peserta&quot;.
+          Teks putih kecil (bukan bold) di bawah judul dan di atas nama event. Kosongkan untuk memakai bawaan
+          &quot;Panduan perjalanan peserta&quot;. Ukurannya diatur di bagian Ukuran Font.
         </p>
         <textarea
           id="panduan-cover-subheading"

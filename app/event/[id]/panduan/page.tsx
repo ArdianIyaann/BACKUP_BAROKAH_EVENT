@@ -836,7 +836,10 @@ export default async function EventPanduanPage({
                     >
                       {event.panduanCoverHeading?.trim() || 'PANDUAN PESERTA'}
                     </p>
-                    <p className="mt-2 translate-y-[20px] mb-[365px] max-w-[22rem] whitespace-pre-line font-serif text-sm font-normal leading-snug text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.55)]">
+                    <p
+                      className="mt-2 translate-y-[20px] mb-[365px] max-w-[22rem] whitespace-pre-line font-serif font-normal leading-snug text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.55)]"
+                      style={{ fontSize: 'calc(0.875rem + var(--panduan-cover-subheading-delta, 0px))' }}
+                    >
                       {event.panduanCoverSubheading?.trim() || 'Panduan perjalanan peserta'}
                     </p>
                     <p

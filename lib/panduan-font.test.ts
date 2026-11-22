@@ -27,6 +27,19 @@ describe('panduan font sizes', () => {
     expect(vars['--panduan-page-title-delta']).toBe('-3px')
   })
 
+  it('mendukung ukuran keterangan putih di bawah judul sampul', () => {
+    expect(PANDUAN_FONT_FIELDS).toContainEqual({
+      key: 'coverSubheading',
+      label: 'Keterangan di Bawah Judul',
+      varName: '--panduan-cover-subheading-delta',
+    })
+
+    const sizes = parsePanduanFontSizes(JSON.stringify({ coverSubheading: 6 }))
+    expect(sizes.coverSubheading).toBe(6)
+    const vars = panduanFontStyleVars(sizes) as Record<string, string>
+    expect(vars['--panduan-cover-subheading-delta']).toBe('6px')
+  })
+
   it('memakai nilai 0 bila data lama belum punya kunci pageTitle', () => {
     const sizes = parsePanduanFontSizes(JSON.stringify({ sectionHeading: 2, itineraryTitle: 9 }))
     expect(sizes.pageTitle).toBe(DEFAULT_PANDUAN_FONT_SIZES.pageTitle)

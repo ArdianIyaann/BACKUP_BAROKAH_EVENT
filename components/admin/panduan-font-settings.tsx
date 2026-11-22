@@ -12,6 +12,7 @@ import {
 
 const FIELD_DESCRIPTIONS: Record<PanduanFontKey, string> = {
   coverHeading: 'Judul kuning besar di atas nama event pada sampul.',
+  coverSubheading: 'Teks putih kecil di bawah judul dan di atas nama event pada sampul.',
   coverTitle: 'Nama event pada sampul panduan.',
   coverLabel: 'Teks di dalam kotak kuning sampul.',
   coverDate: 'Tanggal perjalanan pada sampul.',
@@ -29,7 +30,7 @@ const FONT_GROUPS: { id: string; title: string; description: string; keys: Pandu
     id: 'cover',
     title: 'Sampul',
     description: 'Teks yang tampil di halaman cover panduan.',
-    keys: ['coverHeading', 'coverTitle', 'coverLabel', 'coverDate', 'coverLocation'],
+    keys: ['coverHeading', 'coverSubheading', 'coverTitle', 'coverLabel', 'coverDate', 'coverLocation'],
   },
   {
     id: 'content',

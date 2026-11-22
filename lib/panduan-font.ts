@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react'
 
 export const PANDUAN_FONT_FIELDS = [
   { key: 'coverHeading', label: 'Judul di Atas Nama Event', varName: '--panduan-cover-heading-delta' },
+  { key: 'coverSubheading', label: 'Keterangan di Bawah Judul', varName: '--panduan-cover-subheading-delta' },
   { key: 'coverTitle', label: 'Nama Event Cover', varName: '--panduan-cover-title-delta' },
   { key: 'coverLabel', label: 'Teks Cover', varName: '--panduan-cover-label-delta' },
   { key: 'coverDate', label: 'Tanggal Cover', varName: '--panduan-cover-date-delta' },
@@ -22,6 +23,7 @@ export const PANDUAN_FONT_MAX = 80
 
 export const DEFAULT_PANDUAN_FONT_SIZES: PanduanFontSizes = {
   coverHeading: 0,
+  coverSubheading: 0,
   coverTitle: 0,
   coverLabel: 0,
   coverDate: 0,
