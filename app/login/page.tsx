@@ -112,8 +112,8 @@ export default function LoginPage() {
                 Sesi login aktif
               </p>
               <p className="mt-1 leading-relaxed text-[#657080]">
-                Akun lain bisa login bersamaan di sesi terpisah. Login akun baru tidak akan mengeluarkan sesi yang
-                sudah aktif.
+                Akun yang sama bisa login bersamaan di beberapa perangkat. Login di perangkat lain tidak akan
+                mengeluarkan sesi yang sudah aktif.
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {sessions.map((session) => (

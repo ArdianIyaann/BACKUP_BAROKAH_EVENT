@@ -397,7 +397,8 @@ export function AccountManager({
           )}
         </div>
         <p className="mt-3 rounded-xl bg-[#f8fafc] px-3 py-2 text-[11px] font-semibold text-[#657080]">
-          Satu akun hanya bisa aktif di satu perangkat. Login di perangkat lain ditolak sampai akun logout.
+          Satu akun bisa aktif di beberapa perangkat secara bersamaan. Tiap perangkat punya sesi sendiri, jadi logout
+          di satu perangkat tidak mengeluarkan perangkat lain.
         </p>
       </div>
 
